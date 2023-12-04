@@ -1,0 +1,76 @@
+/* * {
+    border: 1px solid red;
+} */
+
+@font-face {
+    font-family: "LoveGlitch"; /*Can be any text*/
+    src: local("LoveGlitch"),
+        url("../assets/LoveGlitchPersonalUseRegular-vmEyA.ttf");
+}
+
+.navbar {
+    all: unset;
+    list-style-type: none;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: white;
+    background-color: #0e0e0e;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar__site-logo {
+    font-family: "LoveGlitch";
+    font-size: 2.3rem;
+    display: inline-block;
+    padding-top: 0.2rem;
+    line-height: 1.2rem;
+}
+
+.navbar__links {
+    display: flex;
+    gap: 3rem;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar__links-item {
+    transition: 0.1s ease-in-out;
+}
+
+.navbar__links-item:hover {
+    color: rgb(155, 155, 155);
+}
+
+.navbar__icons {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar__icons-item {
+    height: 1.1rem;
+    width: 1.1rem;
+    margin: 0;
+    padding: 0;
+
+    transition: 0.1s ease-in-out;
+}
+
+.navbar__icons-item:hover {
+    color: rgb(155, 155, 155);
+}
+
+.navbar__icons-item svg {
+    height: 1.1rem;
+    width: 1.1rem;
+    margin: 0;
+    padding: 0;
+}

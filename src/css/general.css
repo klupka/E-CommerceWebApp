@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Onest"; /*Can be any text*/
+    src: local("Onest"), url("../assets/Onest-VariableFont_wght.ttf");
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: "Onest";
+    box-sizing: border-box;
+}
