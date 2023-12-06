@@ -1,15 +1,51 @@
-/* .carousel * {
+/* * {
     border: 1px solid red;
 } */
 
+@font-face {
+    font-family: "Onest"; /*Can be any text*/
+    src: local("Onest"), url("../assets/Onest-VariableFont_wght.ttf");
+}
+
+@keyframes solid-indicator-anim {
+    0% {
+        transform: scale(0.8, 0.8);
+    }
+    50% {
+        transform: translateX(0%) translateY(-35%);
+    }
+    70% {
+        transform: translateX(0%) translateY(25%);
+    }
+    100% {
+        transform: translateX(0%) translateY(0%);
+    }
+}
+
+.solid {
+    animation-name: solid-indicator-anim;
+    animation-duration: 0.15s;
+}
+
+.carousel-container {
+    background-color: #0e0e0e;
+}
+
+.page-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 0.5rem;
+    padding-bottom: 2rem;
+}
+
 .carousel {
     display: flex;
-    background-color: #0e0e0e;
     justify-content: center;
     align-items: center;
     padding-top: 2rem;
-    padding-bottom: 2rem;
-    /* border: 1px solid yellow; */
+    padding-bottom: 0rem;
 }
 
 .carousel__btn {
@@ -17,17 +53,27 @@
     border: none;
     font-weight: bold;
     font-size: 2rem;
-    color: white;
     cursor: pointer;
-    height: 3rem;
+    height: 10rem;
+    width: 3rem;
     z-index: 2;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border-radius: 0.1rem;
+    transition: 100ms ease-out;
+}
+
+.carousel__btn:hover {
+    transform: scale(1.05);
+    color: black;
+    background-color: white;
 }
 
 .carousel__product-list {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
     display: flex;
-    width: 50rem;
+    width: 60rem;
     height: 30rem;
     z-index: 1;
     overflow: hidden;
@@ -36,15 +82,15 @@
 
 .featuredItem {
     display: flex;
-    width: 50rem;
-    transition: transform 500ms ease-in-out;
+    width: 60rem;
+    transition: transform 250ms;
 }
 
 .featuredItem__product-image {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 18rem;
+    width: 35rem;
 }
 
 .featuredItem__product-summary {
@@ -53,5 +99,50 @@
     flex-direction: column;
     padding: 2rem;
     justify-content: space-between;
-    width: 32rem;
+    width: 30rem;
+}
+
+.featuredItem__product-summary-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.featuredItem__product-summary-btns button {
+    padding: 0.6rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    font-family: "Onest";
+    font-weight: normal;
+    color: white;
+    border: none;
+    border-radius: 0.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-add-to-cart {
+    background-color: #d92a2a;
+    transition: 100ms ease-in-out;
+}
+
+.btn-add-to-cart:hover {
+    background-color: white;
+    color: black;
+}
+
+.btn-more-details {
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+.featuredItem__product-summary-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.featuredItem__product-summary-title {
+    font-size: 1.5rem;
+    font-weight: bold;
 }

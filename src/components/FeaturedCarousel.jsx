@@ -2,15 +2,15 @@
 import "../css/featuredCarousel.css";
 // Library Imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faCircle } from "@fortawesome/free-solid-svg-icons";
 // Other Imports
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import featuredItems from "../assets/CarouselItems";
 
 const FeaturedCarousel = () => {
-    const [currFeaturedItem, setCurrFeaturedItem] = useState([]);
     const [itemsList, setItemsList] = useState([]);
     const [sliderIndex, setSliderIndex] = useState(0);
+    const [pageIndicators, setPageIndicators] = useState([]);
 
     // Executes on page load (one time)
     useEffect(() => {
@@ -28,7 +28,7 @@ const FeaturedCarousel = () => {
                         <img
                             src={itemImage}
                             alt="Image of Product"
-                            width="250px"
+                            width="400px"
                         />
                     </div>
                     <div className="featuredItem__product-summary">
@@ -42,38 +42,72 @@ const FeaturedCarousel = () => {
                             {itemDescription}
                         </div>
                         <div className="featuredItem__product-summary-price">
-                            {itemPrice}
+                            ${itemPrice}
                         </div>
                         <div className="featuredItem__product-summary-btns">
-                            Add to Cart or else
+                            <button className="btn-add-to-cart">
+                                Add to Cart
+                            </button>
+                            <button className="btn-more-details">
+                                More Details
+                            </button>
                         </div>
                     </div>
                 </div>,
-                // i,
             ]);
         }
 
         setItemsList(featuredItemsList);
-        setCurrFeaturedItem(featuredItemsList[0]);
+        // Default starting array for pageIndicators
+        const pageIndicatorsTempArr = [];
+        for (let j = 0; j < featuredItemsList.length; j++) {
+            if (j === 0) {
+                // Push true for first element
+                pageIndicatorsTempArr.push(true);
+            } else {
+                // Push false for rest of elements
+                pageIndicatorsTempArr.push(false);
+            }
+        }
+        console.log("default", pageIndicatorsTempArr);
+        setPageIndicators(pageIndicatorsTempArr);
     }, []);
-    // const currItemIndex = currFeaturedItem[1];
+
+    const solid = (
+        <svg
+            className="solid"
+            xmlns="http://www.w3.org/2000/svg"
+            height="12"
+            width="12"
+            viewBox="0 0 512 512"
+        >
+            <path
+                fill="#FFFFFF"
+                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"
+            />
+        </svg>
+    );
+    const line = (
+        <svg
+            className="line"
+            xmlns="http://www.w3.org/2000/svg"
+            height="5"
+            width="5"
+            viewBox="0 0 512 512"
+        >
+            <path
+                fill="#757575"
+                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"
+            />
+        </svg>
+    );
 
     return (
-        <>
+        <div className="carousel-container">
             <div className="carousel">
                 <button
                     className="carousel__btn btn-left"
                     onClick={() => {
-                        // if (sliderIndex - 1 >= 0) {
-                        //     const slider =
-                        //         document.getElementById("featuredItem");
-                        //     console.log("i:", sliderIndex - 1);
-                        //     console.log("%:", (sliderIndex - 1) * 100);
-                        //     slider.style.transform = `translateX(calc(${
-                        //         sliderIndex - 1
-                        //     }*-100%))`;
-                        //     setSliderIndex(sliderIndex - 1);
-                        // }
                         if (sliderIndex - 1 >= 0) {
                             for (
                                 var i = 0;
@@ -91,6 +125,11 @@ const FeaturedCarousel = () => {
                                 }*-100%))`;
                                 setSliderIndex(sliderIndex - 1);
                             }
+                            // pageIndicators
+                            pageIndicators[sliderIndex] = false;
+                            pageIndicators[sliderIndex - 1] = true;
+                            console.log("now:", pageIndicators);
+                            setPageIndicators(pageIndicators);
                         }
                     }}
                 >
@@ -105,16 +144,6 @@ const FeaturedCarousel = () => {
                 <button
                     className="carousel__btn btn-right"
                     onClick={() => {
-                        // if (sliderIndex + 1 <= itemsList.length) {
-                        //     const slider =
-                        //         document.getElementsByClassName("featuredItem");
-                        //     console.log("i:", sliderIndex + 1);
-                        //     console.log("%:", (sliderIndex + 1) * 100);
-                        //     slider.style.transform = `translateX(calc(${
-                        //         sliderIndex + 1
-                        //     }*-100%))`;
-                        //     setSliderIndex(sliderIndex + 1);
-                        // }
                         if (sliderIndex + 1 <= itemsList.length - 1) {
                             for (
                                 var i = 0;
@@ -132,13 +161,21 @@ const FeaturedCarousel = () => {
                                 }*-100%))`;
                                 setSliderIndex(sliderIndex + 1);
                             }
+                            // pageIndicators
+                            pageIndicators[sliderIndex] = false;
+                            pageIndicators[sliderIndex + 1] = true;
+                            console.log("now:", pageIndicators);
+                            setPageIndicators(pageIndicators);
                         }
                     }}
                 >
                     <FontAwesomeIcon icon={faAngleRight} />
                 </button>
             </div>
-        </>
+            <div className="page-indicators">
+                {pageIndicators.map((element) => (element ? solid : line))}
+            </div>
+        </div>
     );
 };
 
